@@ -32,8 +32,13 @@ export class AppComponent {
 
   generateTeams() {
     if (!this.numberOfTeams || this.numberOfTeams <= 0) {
+      this.errorMessage = "Invalid Number of Teams"
       return;
     }
+    if (this.members.length < this.numberOfTeams) {
+      this.errorMessage = "Not Enough members"
+    }
+    this.errorMessage = '';
     const allMembers = [...this.members];
     while (allMembers.length) {
       for (let i = 0; i < this.numberOfTeams; i++) {
@@ -46,5 +51,7 @@ export class AppComponent {
         }
       }
     }
+    this.members = [];
+    this.numberOfTeams = '';
   }
 }
